@@ -1,6 +1,6 @@
 <?php
 
-namespace Iflow\Router\implement\Request\GenerateRouters\Parameters;
+namespace iflow\Router\implement\Request\GenerateRouters\Parameters;
 
 use iflow\Container\Container;
 use ReflectionClass;

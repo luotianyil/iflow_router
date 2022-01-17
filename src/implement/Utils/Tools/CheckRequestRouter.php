@@ -1,6 +1,6 @@
 <?php
 
-namespace Iflow\Router\implement\Utils\Tools;
+namespace iflow\Router\implement\Utils\Tools;
 
 class CheckRequestRouter {
 

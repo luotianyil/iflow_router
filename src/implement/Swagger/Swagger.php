@@ -1,6 +1,6 @@
 <?php
 
-namespace Iflow\Router\implement\Swagger;
+namespace iflow\Router\implement\Swagger;
 
 use iflow\Container\Container;
 use iflow\Router\implement\Config;

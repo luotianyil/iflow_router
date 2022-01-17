@@ -1,6 +1,6 @@
 <?php
 
-namespace Iflow\Router\implement\Utils;
+namespace iflow\Router\implement\Utils;
 
 use Attribute;
 use iflow\Container\implement\annotation\abstracts\AnnotationAbstract;

@@ -1,12 +1,12 @@
 <?php
 
-namespace Iflow\Router;
+namespace iflow\Router;
 
 use iflow\Container\implement\annotation\tools\data\Inject;
 use iflow\Router\implement\Config;
-use Iflow\Router\implement\exception\RouterNotFoundException;
-use Iflow\Router\implement\Request\Parameters\GenerateQueryParameters;
-use Iflow\Router\implement\Utils\Tools\CheckRequestRouter;
+use iflow\Router\implement\exception\RouterNotFoundException;
+use iflow\Router\implement\Request\Parameters\GenerateQueryParameters;
+use iflow\Router\implement\Utils\Tools\CheckRequestRouter;
 
 class CheckRule {
 

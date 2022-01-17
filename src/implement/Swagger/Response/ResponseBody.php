@@ -1,6 +1,6 @@
 <?php
 
-namespace Iflow\Router\implement\Swagger\Response;
+namespace iflow\Router\implement\Swagger\Response;
 
 use Attribute;
 use iflow\Container\implement\annotation\abstracts\AnnotationAbstract;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Iflow\Router\implement\exception;
+namespace iflow\Router\implement\exception;
 
 class RouterNotFoundException extends \Exception {
     public function __construct() {

@@ -2,7 +2,7 @@
 
 namespace Iflow\Router\implement\Request\Parameters;
 
-use Iflow\Router\implement\exception\GenerateQueryParametersException;
+use iflow\Router\implement\exception\GenerateQueryParametersException;
 
 class GenerateQueryParameters {
 

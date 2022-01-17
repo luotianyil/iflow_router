@@ -1,6 +1,6 @@
 <?php
 
-namespace Iflow\Router\implement\exception;
+namespace iflow\Router\implement\exception;
 
 class GenerateQueryParametersException extends \Exception {
 }
