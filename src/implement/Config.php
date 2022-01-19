@@ -20,6 +20,8 @@ class Config {
     ];
 
     protected array $routers = [
+        'key' => 'router',
+        'routerPrefix' => [],
         'router' => [],
         'routerParams' => []
     ];

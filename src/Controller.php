@@ -30,11 +30,19 @@ class Controller extends RequestMapping {
     #[Inject]
     protected GenerateRouter $generateRouter;
 
-    protected string $routerConfigKey = '';
+    protected string $routerConfigKey = 'http';
     protected array $routers = [];
 
-    protected string $rule = '';
     protected array $domain = [];
+
+    // 定义控制器注解
+    public function __construct(
+        protected string $rule = '',
+        protected string $method = '*',
+        protected string $ext = '*',
+        protected array $parameter = [],
+        protected array $options = []
+    ) {}
 
     public function process(Reflector $reflector, &$args): Controller {
         $this->reflectionClass = $reflector;
@@ -64,6 +72,7 @@ class Controller extends RequestMapping {
      * @return $this
      */
     protected function initializerControllerMethodRouter(): Controller {
+        $this->generateRouter -> setRouterConfigKey($this -> routerConfigKey);
         foreach ($this->reflectionClass -> getMethods() as $method) {
             if (!$method -> isPublic()) $method -> setAccessible(true);
             $router = $this->generateRouter

@@ -24,13 +24,13 @@ class CheckRule {
     // 当前请求参数
     protected array $parameters = [];
 
-
     /**
      * 获取当前全部路由列表
      * @return array
      */
     public function getRouterList(): array {
-        return $this->config -> getRouters();
+        if (!empty($this->routerList)) return $this->routerList;
+        return $this->routerList = $this->config -> getRouters();
     }
 
     /**
@@ -47,9 +47,9 @@ class CheckRule {
         $this->parameters = $param;
 
         $this->router = [];
-        if (empty($routerList['router'])) return $this->router;
+        if (empty($routerList['router'][$this->routerConfigKey])) return $this->router;
 
-        foreach ($routerList as $rule) {
+        foreach ($routerList['router'][$this->routerConfigKey] as $rule) {
             $this->router = $this->check($rule, $url, $method, $domain);
             if ($this->router) break;
         }
@@ -95,5 +95,14 @@ class CheckRule {
         return (new GenerateQueryParameters(
             $router, $this->routerList, $this->parameters
         )) -> GenerateParameters();
+    }
+
+    /**
+     * @param string $routerConfigKey
+     * @return CheckRule
+     */
+    public function setRouterConfigKey(string $routerConfigKey): CheckRule {
+        $this->routerConfigKey = $routerConfigKey;
+        return $this;
     }
 }

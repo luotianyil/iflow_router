@@ -6,12 +6,9 @@ use iflow\Container\implement\annotation\tools\data\Inject;
 use iflow\Router\implement\Config;
 use iflow\Router\implement\Request\DeleteMapping;
 use iflow\Router\implement\Request\GenerateRouters\Parameters\GenerateRouterParameters;
-use iflow\Router\implement\Request\GetMapping;
-use iflow\Router\implement\Request\HeadMapping;
-use iflow\Router\implement\Request\PatchMapping;
-use iflow\Router\implement\Request\PostMapping;
-use iflow\Router\implement\Request\PutMapping;
-use iflow\Router\implement\Request\RequestMapping;
+use iflow\Router\implement\Request\{
+    GetMapping, HeadMapping, PatchMapping, PostMapping, PutMapping, RequestMapping
+};
 use iflow\Router\implement\Utils\Domain;
 use iflow\Router\implement\Utils\Tools\StrTools;
 use ReflectionAttribute;
@@ -40,6 +37,8 @@ class GenerateRouter {
     #[Inject]
     protected StrTools $strTools;
 
+    protected string $routerConfigKey = 'http';
+
     public function __construct( #[Inject] protected Config $config ) {}
 
     /**
@@ -64,7 +63,6 @@ class GenerateRouter {
         ReflectionClass|Reflector $reflectionClass,
         array $domain
     ): array {
-
         $routers = $this->config -> getRouters();
         $parameter = $this->generateRouterParameters
             -> setParameters($this -> config -> getRouters()['routerParams'])
@@ -77,8 +75,11 @@ class GenerateRouter {
 
         $reflectionFunctionRouter = [];
 
-        if (empty($routers['router'][$this->parentRule]))
-            $routers['router'][$this->parentRule] = [];
+        if (empty($routers['router'][$this->routerConfigKey]))
+            $routers['router'][$this->routerConfigKey] = [];
+
+        if (empty($routers['router'][$this->routerConfigKey][$this->parentRule]))
+            $routers['router'][$this->routerConfigKey][$this->parentRule] = [];
 
         // 处理当前 方法路由注解
         foreach ($this->getReflectionFunctionAbstractAnnotations($reflectionFunctionAbstract) as $functionAbstractAnnotation) {
@@ -106,7 +107,7 @@ class GenerateRouter {
         }
 
         foreach ($reflectionFunctionRouter as $router) {
-            $routers['router'][$this -> parentRule][] = $router;
+            $routers['router'][$this->routerConfigKey][$this -> parentRule][] = $router;
         }
 
         return $this->config -> setRouters($routers) -> getRouters();
@@ -163,7 +164,7 @@ class GenerateRouter {
         $startStr = explode('/', $router)[0];
         preg_match("/^%(.*?)%$/", $startStr, $prefix);
         if (count($prefix) > 1) {
-            $router = str_replace($startStr, $this->config['routerPrefix'][$prefix[1]] ?? '', $router);
+            $router = str_replace($startStr, $this->config -> getRouters()['routerPrefix'][$prefix[1]] ?? '', $router);
         }
         return $router;
     }
@@ -179,5 +180,12 @@ class GenerateRouter {
             return ($domainAnnotation -> newInstance()) -> getDomain();
         }
         return [];
+    }
+
+    /**
+     * @param string $routerConfigKey
+     */
+    public function setRouterConfigKey(string $routerConfigKey): void {
+        $this->routerConfigKey = $routerConfigKey;
     }
 }
