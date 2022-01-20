@@ -34,10 +34,11 @@ class Swagger {
 
     /**
      * 生成SwaggerApiJson格式Api列表信息
+     * @param string $routerConfigKey
      * @return array
      */
-    public function buildSwaggerApiJson(): array {
-        foreach ($this->routers['router'] as $routerKey => $routerValue) {
+    public function buildSwaggerApiJson(string $routerConfigKey = 'http'): array {
+        foreach ($this->routers['router'][$routerConfigKey] as $routerKey => $routerValue) {
             foreach ($routerValue as $pathKey => $pathValue) {
                 $pathValue['parameter'] = $this->getParameters($pathValue);
                 $pathValue['rulePath'] =
