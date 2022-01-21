@@ -16,4 +16,8 @@ class Domain extends AnnotationAbstract {
         return null;
     }
 
+    public function getDomain(): array {
+        return is_string($this->domain) ? explode('|', $this->domain) : $this->domain;
+    }
+
 }

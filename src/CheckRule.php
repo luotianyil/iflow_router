@@ -19,7 +19,7 @@ class CheckRule {
     #[Inject]
     protected Config $config;
 
-    protected string $routerConfigKey = '';
+    protected string $routerConfigKey = 'http';
 
     // 当前请求参数
     protected array $parameters = [];

@@ -38,7 +38,7 @@ class Swagger {
      * @return array
      */
     public function buildSwaggerApiJson(string $routerConfigKey = 'http'): array {
-        foreach ($this->routers['router'][$routerConfigKey] as $routerKey => $routerValue) {
+        foreach ($this->routers['router'][$routerConfigKey] ?? [] as $routerKey => $routerValue) {
             foreach ($routerValue as $pathKey => $pathValue) {
                 $pathValue['parameter'] = $this->getParameters($pathValue);
                 $pathValue['rulePath'] =
@@ -52,7 +52,7 @@ class Swagger {
     }
 
     /**
-     * 生成单挑路由请求数据
+     * 生成单条路由请求数据
      * @param array $router
      * @return array
      */

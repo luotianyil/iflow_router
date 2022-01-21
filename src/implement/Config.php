@@ -5,8 +5,6 @@ namespace iflow\Router\implement;
 class Config {
 
     protected array $defaultConfig = [
-        // 路由配置标识KEY
-        'key' => 'router',
         // 路由前缀
         'routerPrefix' => [],
         'swagger' => [
@@ -15,12 +13,11 @@ class Config {
                 'version' => '0.0.1'
             ],
             // 服务器列表
-            'server' => [],
+            'server' => []
         ]
     ];
 
     protected array $routers = [
-        'key' => 'router',
         'routerPrefix' => [],
         'router' => [],
         'routerParams' => []
@@ -59,5 +56,13 @@ class Config {
      */
     public function getSwagger(): array {
         return $this->config['swagger'];
+    }
+
+    /**
+     * 获取路由前缀
+     * @return array
+     */
+    public function getRouterPrefix(): array {
+        return $this->config['routerPrefix'] ?? [];
     }
 }
