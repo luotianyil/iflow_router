@@ -5,8 +5,8 @@ namespace iflow\Router;
 use iflow\Container\implement\annotation\tools\data\Inject;
 use iflow\Router\implement\Config;
 use iflow\Router\implement\exception\RouterNotFoundException;
+use iflow\Router\implement\Request\CheckRouter\CheckRequestRouter;
 use iflow\Router\implement\Request\Parameters\GenerateQueryParameters;
-use iflow\Router\implement\Utils\Tools\CheckRequestRouter;
 
 class CheckRule {
 
@@ -54,6 +54,8 @@ class CheckRule {
             if ($this->router) break;
         }
 
+        $this->router = $this->router ?: $this->checkRequestRouter -> getMissRouter($routerList['missRouter'][$this->routerConfigKey], $url);
+
         return $this->router ? $this->bindParam($this->router) : throw new RouterNotFoundException();
     }
 
@@ -70,9 +72,7 @@ class CheckRule {
         foreach ($ruleAll as $ruleKey => $rule) {
             if (is_array($rule) && empty($rule['rule'])) {
                 // 验证路由
-                if (!str_starts_with(ltrim($url, '/'), ltrim($ruleKey, '/'))) {
-                    continue;
-                }
+                if (!str_starts_with(ltrim($url, '/'), ltrim($ruleKey, '/'))) continue;
                 $router = $this->check($rule, $url, $method, $domain);
             } else if (is_array($rule)) {
                 $router = $this->checkRequestRouter -> check(

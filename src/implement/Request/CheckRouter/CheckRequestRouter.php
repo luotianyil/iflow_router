@@ -1,20 +1,27 @@
 <?php
 
-namespace iflow\Router\implement\Utils\Tools;
+namespace iflow\Router\implement\Request\CheckRouter;
+
+use iflow\Router\implement\Request\CheckRouter\Traits\CheckMissRouter;
 
 class CheckRequestRouter {
+
+    use CheckMissRouter;
 
     protected array $checkProcess = [
         'regx', 'domain', 'method', 'ext'
     ];
 
     protected array $router = [];
+
     protected string $url = '';
 
     // 请求方法
     protected string $method = '';
+
     // 路由请求尾缀
     protected string $ext = '';
+
     protected string $domain = '';
 
 
@@ -52,8 +59,7 @@ class CheckRequestRouter {
      * @param array $url
      * @return bool
      */
-    protected function regx(array $rule, array $url): bool
-    {
+    protected function regx(array $rule, array $url): bool {
         if (count($rule) !== count($url)) return false;
         $ruleIsSuccess = true;
         foreach ($url as $urlKey => $urlValue) {

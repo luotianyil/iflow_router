@@ -7,6 +7,11 @@
             "iflow\\Router\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "iflowTest\\": "tests"
+        }
+    },
     "authors": [
         {
             "name": "洛水天依",
@@ -16,6 +21,7 @@
     "minimum-stability": "stable",
     "require": {
         "php": ">=8.1",
-        "iflow/container": "^0.0.1"
+        "iflow/container": "^0.0.1",
+        "iflow/helper": "^0.0.1"
     }
 }

@@ -20,7 +20,8 @@ class Config {
     protected array $routers = [
         'routerPrefix' => [],
         'router' => [],
-        'routerParams' => []
+        'routerParams' => [],
+        'missRouter' => []
     ];
 
     public function __construct(protected array $config = []) {
@@ -64,5 +65,14 @@ class Config {
      */
     public function getRouterPrefix(): array {
         return $this->config['routerPrefix'] ?? [];
+    }
+
+
+    /**
+     * 获取缓存配置
+     * @return array
+     */
+    public function getCache(): array {
+        return $this->config['cache'] ?? [];
     }
 }

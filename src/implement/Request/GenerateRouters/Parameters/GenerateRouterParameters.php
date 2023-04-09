@@ -14,6 +14,7 @@ class GenerateRouterParameters {
 
     // 路由参数
     protected array $parameters = [];
+
     protected array $routerParameters = [];
 
     /**

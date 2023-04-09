@@ -4,10 +4,13 @@ namespace iflow\Router\implement\Utils;
 
 use Attribute;
 use iflow\Container\implement\annotation\abstracts\AnnotationAbstract;
+use iflow\Container\implement\annotation\implement\enum\AnnotationEnum;
 use Reflector;
 
 #[Attribute(Attribute::TARGET_CLASS|Attribute::TARGET_METHOD)]
 class Domain extends AnnotationAbstract {
+
+    public AnnotationEnum $hookEnum = AnnotationEnum::NonExecute;
 
     public function __construct(protected array|string $domain = '*', protected array $args = []) {}
 

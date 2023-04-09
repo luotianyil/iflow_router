@@ -5,11 +5,11 @@ namespace iflow\Router;
 use iflow\Container\Container;
 use iflow\Container\implement\annotation\implement\enum\AnnotationEnum;
 use iflow\Container\implement\annotation\tools\data\Inject;
+use iflow\Helper\Str\Str;
 use iflow\Router\implement\Config;
 use iflow\Router\implement\Request\GenerateRouters\GenerateRouter;
 use iflow\Router\implement\Request\RequestMapping;
 use Attribute;
-use iflow\Router\implement\Utils\Tools\StrTools;
 use ReflectionClass;
 use Reflector;
 
@@ -25,15 +25,14 @@ class Controller extends RequestMapping {
     protected Config $config;
 
     #[Inject]
-    protected StrTools $strTools;
-
-    #[Inject]
     protected GenerateRouter $generateRouter;
 
     protected string $routerConfigKey = 'http';
     protected array $routers = [];
 
     protected array $domain = [];
+
+    protected mixed $missRouter;
 
     // 定义控制器注解
     public function __construct(
@@ -61,7 +60,7 @@ class Controller extends RequestMapping {
      */
     protected function getControllerRouter(): Controller {
         $this->rule = $this->generateRouter -> getRouterPrefix(
-            $this -> rule ?: $this->strTools -> humpToLower($this -> reflectionClass -> getShortName())
+            $this -> rule ?: Str::humpToLower($this -> reflectionClass -> getShortName())
         );
         $this->domain = $this->generateRouter -> getDomain($this -> reflectionClass);
         return $this;

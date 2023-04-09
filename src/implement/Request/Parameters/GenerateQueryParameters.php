@@ -1,6 +1,6 @@
 <?php
 
-namespace Iflow\Router\implement\Request\Parameters;
+namespace iflow\Router\implement\Request\Parameters;
 
 use iflow\Router\implement\exception\GenerateQueryParametersException;
 
