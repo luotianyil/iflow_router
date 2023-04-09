@@ -17,18 +17,26 @@ trait CheckMissRouter {
 
         $refRouter = '';
         $refRouterLength = 0;
-        foreach ($missRouter as $routerKey => $router) {
-            $routerKeyArr = explode('/', ltrim('/'.$routerKey, '/'));
 
-            $endStr = substr($url, strlen($routerKey), 1);
-            if (str_starts_with($url, $routerKey) && ($endStr === '/' || $endStr === '') && count($routerKeyArr) > $refRouterLength) {
+        foreach ($missRouter as $routerKey => $router) {
+
+            if (empty($router)) continue;
+
+            $_routerKey = str_replace('//', '/', $routerKey);
+            $routerKeyArr = explode('/', $_routerKey);
+            $endStr = substr($url, strlen($_routerKey), 1);
+
+            if (str_starts_with($url, $_routerKey)
+                && ($endStr === '/' || $endStr === '' || $_routerKey === '/')
+                && count($routerKeyArr) > $refRouterLength
+            ) {
                 $refRouter = $routerKey;
                 $refRouterLength = count($routerKeyArr);
             }
         }
 
         if ($refRouter === '') return $this->getGlobalRouter();
-        return $this->missRouter[$refRouter];
+        return $this->missRouter[$refRouter] ?? [];
     }
 
 

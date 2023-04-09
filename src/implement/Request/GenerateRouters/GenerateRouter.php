@@ -73,7 +73,7 @@ class GenerateRouter {
         }
 
         if (!empty($refMissRouter)) {
-            $routers['missRouter'][$this->routerConfigKey][$this -> parentRule] = $refMissRouter;
+            $routers['missRouter'][$this->routerConfigKey][$refMissRouter['mappingRule'] ?: $this -> parentRule] = $refMissRouter;
         }
 
         if (!empty($refMissGlobalRouter)) {

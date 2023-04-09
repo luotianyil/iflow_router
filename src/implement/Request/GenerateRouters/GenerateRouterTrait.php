@@ -107,7 +107,8 @@ trait GenerateRouterTrait {
             'ext' => $mapping -> getExt(),
             'parameter' => $mapping -> getParameter(),
             'options' => $mapping -> getOptions(),
-            'domain' => $domain
+            'domain' => $domain,
+            'mappingRule' => $mapping -> getRule()
         ];
     }
 
