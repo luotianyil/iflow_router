@@ -19,7 +19,9 @@ trait CheckMissRouter {
         $refRouterLength = 0;
         foreach ($missRouter as $routerKey => $router) {
             $routerKeyArr = explode('/', ltrim('/'.$routerKey, '/'));
-            if (str_starts_with($url, $routerKey) && count($routerKeyArr) > $refRouterLength) {
+
+            $endStr = substr($url, strlen($routerKey), 1);
+            if (str_starts_with($url, $routerKey) && ($endStr === '/' || $endStr === '') && count($routerKeyArr) > $refRouterLength) {
                 $refRouter = $routerKey;
                 $refRouterLength = count($routerKeyArr);
             }
