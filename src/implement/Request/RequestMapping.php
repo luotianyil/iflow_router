@@ -7,7 +7,7 @@ use iflow\Container\implement\annotation\abstracts\AnnotationAbstract;
 use iflow\Container\implement\annotation\implement\enum\AnnotationEnum;
 use Reflector;
 
-#[Attribute(Attribute::TARGET_CLASS| Attribute::TARGET_METHOD)]
+#[Attribute(Attribute::TARGET_CLASS|Attribute::TARGET_METHOD)]
 class RequestMapping extends AnnotationAbstract {
 
     public AnnotationEnum $hookEnum = AnnotationEnum::NonExecute;

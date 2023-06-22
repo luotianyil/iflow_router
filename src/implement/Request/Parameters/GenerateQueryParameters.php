@@ -72,12 +72,12 @@ class GenerateQueryParameters {
 
     /**
      * 更改路由参数默认值
-     * @param $routerParam | 路由参数
-     * @param $param | 前端传参
+     * @param array $routerParam | 路由参数
+     * @param mixed $param | 前端传参
      * @return mixed
      * @throws GenerateQueryParametersException
      */
-    public function setDefaultValue($routerParam, mixed $param): mixed
+    public function setDefaultValue(array $routerParam, mixed $param): mixed
     {
         if ($routerParam['type'][0] === 'mixed') return $param;
         if (empty($param) && !is_numeric($param)) return $routerParam['default'];

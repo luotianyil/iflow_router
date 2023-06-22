@@ -26,7 +26,12 @@ class GenerateRouterParameters {
         return $this;
     }
 
-    // 获取路由方法参数
+    /**
+     * 获取路由方法参数
+     * @param ReflectionFunctionAbstract $method
+     * @return array
+     * @throws ReflectionException
+     */
     public function getRouterMethodParameter(ReflectionFunctionAbstract $method): array {
         $this->method = $method;
         $this->parameters = $this->nextParameter();
@@ -36,7 +41,11 @@ class GenerateRouterParameters {
         ];
     }
 
-    // 遍历方法参数
+    /**
+     * 遍历方法参数
+     * @return array
+     * @throws ReflectionException
+     */
     protected function nextParameter(): array {
         $parameters = $this->method -> getParameters();
         $parameter = [];
@@ -54,8 +63,11 @@ class GenerateRouterParameters {
                 continue;
             }
 
-            if (class_exists($typeName)) {
-                if (empty($this->routerParams[$typeName])) $this->getClassParams($typeName);
+            $getTypeNameByClassOrInterface = Container::getInstance() -> checkTypeNameByClassOrInterface($typeName);
+            if (in_array($getTypeNameByClassOrInterface, [ 'class', 'interface' ])) {
+                if (empty($this->routerParams[$typeName]) && $getTypeNameByClassOrInterface === 'class')
+                    $this->getClassParams($typeName);
+
                 $parameter[$name] = [
                     'type' => [ 'class' ],
                     'class' => $typeName,

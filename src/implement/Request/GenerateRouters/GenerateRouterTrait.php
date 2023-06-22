@@ -43,12 +43,15 @@ trait GenerateRouterTrait {
      */
     protected string $parentRule = "";
 
-
+    /**
+     * 自定义路由分类
+     * @var string
+     */
     protected string $routerConfigKey = 'http';
 
     /**
      * @param string $parentRule
-     * @return GenerateRouter
+     * @return GenerateRouterTrait|GenerateRouter
      */
     public function setParentRule(string $parentRule): self {
         $this->parentRule = $parentRule;
@@ -116,8 +119,9 @@ trait GenerateRouterTrait {
      * 初始化路由信息
      * @param array|ReflectionFunctionAbstract $routers
      * @return array
+     * @throws \ReflectionException
      */
-    protected function initRefRouter(array|ReflectionFunctionAbstract $routers = []): array{
+    protected function initRefRouter(array|ReflectionFunctionAbstract $routers = []): array {
 
         $parameter = [];
 
